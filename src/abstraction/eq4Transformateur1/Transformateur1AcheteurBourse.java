@@ -5,6 +5,10 @@ import abstraction.eq4Transformateur1.contratCadre.TransformateurContratCadre;
 import abstraction.eqXRomu.bourseCacao.IAcheteurBourse;
 import abstraction.eqXRomu.produits.Feve;
 
+/**
+ * @author YAOU Reda
+ */
+
 public class Transformateur1AcheteurBourse extends Transformateur1Stocks implements IAcheteurBourse{
 	
 	private Feve feve;
@@ -40,6 +44,9 @@ public class Transformateur1AcheteurBourse extends Transformateur1Stocks impleme
 		}
 
 		this.journalTransactions.ajouter("J'ai maintenant " + this.stockFeves.get(f) + " tonnes de " + f + " en stock.");
+
+		this.VolumeTotalDeStock.setValeur(this, this.VolumeTotalDeStock.getValeur(this.cryptogramme) + quantiteEnT, this.cryptogramme);
+		this.journalTransactions.ajouter("J'ai maintenant " + this.VolumeTotalDeStock.getValeur(this.cryptogramme) + " tonnes de feves en stock.");
 	}
 
 	@Override

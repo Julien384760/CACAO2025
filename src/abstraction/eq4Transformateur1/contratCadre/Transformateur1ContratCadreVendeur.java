@@ -83,8 +83,8 @@ public class Transformateur1ContratCadreVendeur extends TransformateurContratCad
 	//adopter une stratégie selon celui-ci
 	public double propositionPrix(ExemplaireContratCadre contrat) {
 		if(contrat.getQuantiteTotale() >= 2000){
-			this.prixInitialementVoulu = 0.75*5226;
-			return 0.75*5226; 
+			this.prixInitialementVoulu = 0.9*5226;
+			return 0.9*5226; 
 		}
 		this.prixInitialementVoulu = 5226*(1 - 0.25*contrat.getQuantiteTotale()/2000);
 		return 5226*(1 - 0.25*contrat.getQuantiteTotale()/2000);// plus la quantite est elevee, plus le prix est interessant
@@ -121,7 +121,10 @@ public class Transformateur1ContratCadreVendeur extends TransformateurContratCad
 
 	public void notificationNouveauContratCadre(ExemplaireContratCadre contrat) {
 		this.mesContratEnTantQueVendeur.add(contrat);
-		this.journalCC.ajouter("Nouveau contrat cadre obtenu avec" + contrat.getAcheteur());
+		this.journalCC.ajouter("Nouveau contrat cadre");
+		this.journalCC.ajouter("Détail du contrat : " + contrat.getEcheancier() + contrat.getQuantiteTotale());
+		this.journalCC.ajouter("Acheteur : " + contrat.getAcheteur() + "; Vendeur : " + contrat.getVendeur());
+		this.journalCC.ajouter("Produit : " + contrat.getProduit());
 	}
 	
 

@@ -4,6 +4,7 @@ import abstraction.eqXRomu.filiere.Filiere;
 import abstraction.eqXRomu.produits.IProduit;
 import abstraction.eqXRomu.contratsCadres.*;
 import abstraction.eqXRomu.produits.Feve;
+import abstraction.eqXRomu.produits.Chocolat;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -116,6 +117,8 @@ public class Transformateur1ContratCadreVendeurAcheteur extends Transformateur1C
 					vendeur = vendeurs.get((int)( Filiere.random.nextDouble()*vendeurs.size()));
 				}
 				if (vendeur!=null) {
+					//A MODIFIER
+					//Echéancier à modifier
 					journalCC.ajouter("Demande au superviseur de debuter les negociations pour un contrat cadre de "+produit+" avec le vendeur "+vendeur);
 					ExemplaireContratCadre cc = supCCadre.demandeAcheteur((IAcheteurContratCadre)this, vendeur, produit, new Echeancier(Filiere.LA_FILIERE.getEtape()+1, 10, 20.), cryptogramme,false);
 					journalCC.ajouter("-->aboutit au contrat "+cc);
@@ -128,7 +131,7 @@ public class Transformateur1ContratCadreVendeurAcheteur extends Transformateur1C
 		//Pour tous nos produits, on cherche des contrats cadre pour vendre notre production
 		//Cette rechercche est systématique, il faudrait en réalité prendre en compte la nécessité de faire un CC
 		journalCC.ajouter("Recherche d'un acheteur aupres de qui vendre");
-		for (IProduit produit : stockChoco.keySet()){
+		for (Chocolat produit : stockChoco.keySet()){
 			// Proposition d'un contrat a un des achteur choisi aleatoirement
 
 			List<IAcheteurContratCadre> acheteurs = supCCadre.getAcheteurs(produit);
@@ -157,8 +160,10 @@ public class Transformateur1ContratCadreVendeurAcheteur extends Transformateur1C
 	}
 
 	public boolean achete(IProduit produit) {
-		return true;
+		//Nous n'achetons que des fèves de cacao, pas de chocolat
+		return stockFeves.keySet().contains(produit);
 	}
+
 	public String toString() {
 		return this.getNom();
 	}
